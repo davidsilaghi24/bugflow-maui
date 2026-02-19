@@ -21,7 +21,7 @@ public partial class ProiectDetailPage : ContentPage
         numeEntry.Text = proiect.Nume;
         descriereEditor.Text = proiect.Descriere;
         dataStartPicker.Date = proiect.DataStart == default ? DateTime.Today : proiect.DataStart;
-        dataDeadlinePicker.Date = proiect.DataDeadline == default ? DateTime.Today.AddDays(30) : proiect.DataDeadline;
+        dataDeadlinePicker.Date = proiect.DataDeadline == default ? DateTime.Today.AddDays(Proiect.DefaultDeadlineDays) : proiect.DataDeadline;
 
         ValidateForm();
     }

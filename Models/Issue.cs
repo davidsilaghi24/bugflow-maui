@@ -31,7 +31,8 @@ public class Issue
 
     public StatusIssue Status { get; set; } = StatusIssue.ToDo;
 
-    public DateTime DataEstimata { get; set; } = DateTime.Now.AddDays(7);
+    public const int DefaultDeadlineDays = 7;
+    public DateTime DataEstimata { get; set; } = DateTime.Now.AddDays(DefaultDeadlineDays);
 
     [ForeignKey(typeof(Proiect))]
     public int ProiectId { get; set; }

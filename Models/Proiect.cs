@@ -21,7 +21,8 @@ public class Proiect
 
     public DateTime DataStart { get; set; } = DateTime.Now;
 
-    public DateTime DataDeadline { get; set; } = DateTime.Now.AddDays(30);
+    public const int DefaultDeadlineDays = 30;
+    public DateTime DataDeadline { get; set; } = DateTime.Now.AddDays(DefaultDeadlineDays);
 
     public StatusProiect Status { get; set; } = StatusProiect.Activ;
 

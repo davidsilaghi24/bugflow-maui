@@ -24,7 +24,7 @@ public partial class IssueDetailPage : ContentPage
 
         descriereEditor.Text = issue.Descriere;
         titluEntry.Text = issue.Titlu;
-        dataEstimataPicker.Date = issue.DataEstimata == default ? DateTime.Today.AddDays(7) : issue.DataEstimata;
+        dataEstimataPicker.Date = issue.DataEstimata == default ? DateTime.Today.AddDays(Issue.DefaultDeadlineDays) : issue.DataEstimata;
 
         comentariiButton.IsVisible = issue.Id != 0;
     }

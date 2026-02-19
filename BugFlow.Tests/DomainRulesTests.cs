@@ -107,6 +107,20 @@ public class DomainRulesTests
     }
 
     [Fact]
+    public void Issue_DefaultDataEstimata_IsInFuture()
+    {
+        var issue = new Issue();
+        Assert.True(issue.DataEstimata > DateTime.Now);
+    }
+
+    [Fact]
+    public void Proiect_DefaultDataDeadline_IsAfterDataStart()
+    {
+        var proiect = new Proiect();
+        Assert.True(proiect.DataDeadline > proiect.DataStart);
+    }
+
+    [Fact]
     public void Test_RaportCalculator_PrioritateStats_AreCorrect()
     {
         var issues = new List<Issue>
