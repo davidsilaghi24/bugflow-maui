@@ -44,6 +44,7 @@ public partial class ComentariuDetailPage : ContentPage
         }
         catch (Exception ex)
         {
+            App.LogError("Nu s-au putut incarca datele comentariului", ex);
             await DisplayAlert("Eroare", $"Nu s-au putut incarca datele: {ex.Message}", "OK");
         }
         finally

@@ -9,7 +9,7 @@ Aplicație mobilă de gestionare a proiectelor, issue-urilor și comentariilor, 
 - Validare formulare în timp real (behaviors)
 - Relații între entități cu reguli clare la ștergere
 - Pagină de raport cu statistici pe status și prioritate
-- Suită de 27 teste unitare pentru persistență și reguli de business
+- Suită de 30 teste unitare pentru persistență și reguli de business
 
 ## Stack
 

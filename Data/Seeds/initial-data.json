@@ -1,0 +1,164 @@
+{
+  "proiecte": [
+    {
+      "key": "p1",
+      "nume": "BugFlow App",
+      "descriere": "Aplicatie de bug tracking pentru echipe agile",
+      "dataStart": "2025-01-10T00:00:00",
+      "dataDeadline": "2025-06-30T00:00:00",
+      "status": "Activ"
+    },
+    {
+      "key": "p2",
+      "nume": "E-Commerce Platform",
+      "descriere": "Platforma de comert electronic cu plati integrate",
+      "dataStart": "2025-02-01T00:00:00",
+      "dataDeadline": "2025-09-15T00:00:00",
+      "status": "Activ"
+    },
+    {
+      "key": "p3",
+      "nume": "Website Redesign",
+      "descriere": "Redesign complet al site-ului companiei",
+      "dataStart": "2024-06-01T00:00:00",
+      "dataDeadline": "2024-12-31T00:00:00",
+      "status": "Finalizat"
+    }
+  ],
+  "membri": [
+    {
+      "key": "m1",
+      "numeComplet": "Andrei Popescu",
+      "email": "andrei.popescu@bugflow.ro",
+      "rol": "Developer",
+      "seniority": "Senior"
+    },
+    {
+      "key": "m2",
+      "numeComplet": "Maria Ionescu",
+      "email": "maria.ionescu@bugflow.ro",
+      "rol": "Tester",
+      "seniority": "Mid"
+    },
+    {
+      "key": "m3",
+      "numeComplet": "Ion Dumitrescu",
+      "email": "ion.dumitrescu@bugflow.ro",
+      "rol": "PM",
+      "seniority": "Senior"
+    },
+    {
+      "key": "m4",
+      "numeComplet": "Elena Vasile",
+      "email": "elena.vasile@bugflow.ro",
+      "rol": "Developer",
+      "seniority": "Junior"
+    }
+  ],
+  "issues": [
+    {
+      "titlu": "Login crash pe Android",
+      "descriere": "Aplicatia se opreste la autentificare pe Android 14",
+      "prioritate": "High",
+      "status": "InProgress",
+      "dataEstimata": "2025-03-15T00:00:00",
+      "proiectKey": "p1",
+      "membruKey": "m1"
+    },
+    {
+      "titlu": "Buton Submit nu raspunde",
+      "descriere": "Butonul Submit din formularul de contact nu functioneaza",
+      "prioritate": "Medium",
+      "status": "ToDo",
+      "dataEstimata": "2025-04-01T00:00:00",
+      "proiectKey": "p1",
+      "membruKey": "m4"
+    },
+    {
+      "titlu": "Optimizare query-uri SQL",
+      "descriere": "Query-urile pentru rapoarte dureaza peste 10 secunde",
+      "prioritate": "High",
+      "status": "Review",
+      "dataEstimata": "2025-03-20T00:00:00",
+      "proiectKey": "p2",
+      "membruKey": "m1"
+    },
+    {
+      "titlu": "Design responsive navbar",
+      "descriere": "Navbar-ul nu se afiseaza corect pe mobile",
+      "prioritate": "Medium",
+      "status": "ToDo",
+      "dataEstimata": "2025-05-01T00:00:00",
+      "proiectKey": "p2",
+      "membruKey": "m4"
+    },
+    {
+      "titlu": "Integrare gateway plati",
+      "descriere": "Integrarea cu Stripe pentru plati cu cardul",
+      "prioritate": "High",
+      "status": "InProgress",
+      "dataEstimata": "2025-04-15T00:00:00",
+      "proiectKey": "p2",
+      "membruKey": "m1"
+    },
+    {
+      "titlu": "Teste unitare modul auth",
+      "descriere": "Scrierea testelor unitare pentru modulul de autentificare",
+      "prioritate": "Low",
+      "status": "Done",
+      "dataEstimata": "2025-02-28T00:00:00",
+      "proiectKey": "p1",
+      "membruKey": "m2"
+    }
+  ],
+  "comentarii": [
+    {
+      "text": "Am reprodus bug-ul pe Pixel 8. Investighez cauza.",
+      "data": "2025-02-10T09:30:00",
+      "autorKey": "m1",
+      "issueIndex": 0
+    },
+    {
+      "text": "Cred ca e legat de noul API level 34. Verific compatibilitatea.",
+      "data": "2025-02-10T14:15:00",
+      "autorKey": "m1",
+      "issueIndex": 0
+    },
+    {
+      "text": "Am testat pe 3 dispozitive, bug-ul apare doar pe Android 14+.",
+      "data": "2025-02-11T10:00:00",
+      "autorKey": "m2",
+      "issueIndex": 0
+    },
+    {
+      "text": "Butonul are event handler-ul dezactivat in XAML. Trebuie verificat.",
+      "data": "2025-02-12T11:00:00",
+      "autorKey": "m4",
+      "issueIndex": 1
+    },
+    {
+      "text": "Am adaugat indexi pe tabelele de rapoarte. Timpul a scazut la 2s.",
+      "data": "2025-02-13T16:30:00",
+      "autorKey": "m1",
+      "issueIndex": 2
+    },
+    {
+      "text": "Review-ul arata bine, mai trebuie un test de performanta.",
+      "data": "2025-02-14T09:00:00",
+      "autorKey": "m3",
+      "issueIndex": 2
+    },
+    {
+      "text": "Am inceput integrarea cu Stripe. Documentatia lor e foarte clara.",
+      "data": "2025-02-15T10:45:00",
+      "autorKey": "m1",
+      "issueIndex": 4
+    },
+    {
+      "text": "Toate testele trec. Marchez ca Done.",
+      "data": "2025-02-16T17:00:00",
+      "autorKey": "m2",
+      "issueIndex": 5
+    }
+  ]
+}

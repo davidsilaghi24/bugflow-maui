@@ -57,6 +57,23 @@ public class DomainRulesTests
     }
 
     [Fact]
+    public void Test_RaportCalculator_SingleItem_IsHundredPercent()
+    {
+        var issues = new List<Issue>
+        {
+            new() { Status = StatusIssue.Done, Prioritate = Prioritate.High }
+        };
+
+        var statusStats = RaportCalculator.BuildStatusStats(issues);
+        var prioritateStats = RaportCalculator.BuildPrioritateStats(issues);
+
+        Assert.Equal(100, statusStats.Single(s => s.Key == StatusIssue.Done).Procent);
+        Assert.Equal(0, statusStats.Single(s => s.Key == StatusIssue.ToDo).Procent);
+        Assert.Equal(100, prioritateStats.Single(s => s.Key == Prioritate.High).Procent);
+        Assert.Equal(0, prioritateStats.Single(s => s.Key == Prioritate.Low).Procent);
+    }
+
+    [Fact]
     public void Test_RaportCalculator_EmptyInput_ReturnsZeroStats()
     {
         var empty = new List<Issue>();
@@ -77,6 +94,16 @@ public class DomainRulesTests
             Assert.Equal(0, s.Count);
             Assert.Equal(0, s.Procent);
         });
+    }
+
+    [Fact]
+    public void Test_ValidationRules_HasRequiredText()
+    {
+        Assert.True(ValidationRules.HasRequiredText("anything"));
+        Assert.True(ValidationRules.HasRequiredText("  x  "));
+        Assert.False(ValidationRules.HasRequiredText(string.Empty));
+        Assert.False(ValidationRules.HasRequiredText("   "));
+        Assert.False(ValidationRules.HasRequiredText(null));
     }
 
     [Fact]

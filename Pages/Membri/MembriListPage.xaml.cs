@@ -30,6 +30,7 @@ public partial class MembriListPage : ContentPage
         }
         catch (Exception ex)
         {
+            App.LogError("Nu s-au putut incarca membrii", ex);
             await DisplayAlert("Eroare", $"Nu s-au putut incarca membrii: {ex.Message}", "OK");
             _allMembers.Clear();
             listView.ItemsSource = _allMembers;

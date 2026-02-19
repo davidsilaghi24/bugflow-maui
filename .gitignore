@@ -37,3 +37,6 @@ coverage/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Editor/tool local config
+.claude/

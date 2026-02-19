@@ -59,6 +59,7 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+		<MauiAsset Include="Data\Seeds\initial-data.json" LogicalName="initial-data.json" />
 	</ItemGroup>
 
 	<ItemGroup>

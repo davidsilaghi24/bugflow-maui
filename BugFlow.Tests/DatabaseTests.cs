@@ -519,6 +519,40 @@ public class DatabaseTests : IAsyncLifetime
         Assert.Equal(1, await _database.GetForeignKeysPragmaAsync());
     }
 
+    [Fact]
+    public async Task Test_SaveIssue_WithNoMemberAssigned_IsAllowed()
+    {
+        // MembruEchipaId = 0 means unassigned — this is the state left by DeleteMembruAsync.
+        // If this contract breaks, the delete-member logic silently corrupts data.
+        var proiect = await CreateProiectAsync("P-Unassigned");
+
+        var issue = new Issue
+        {
+            Titlu = "Issue neasignat",
+            Descriere = "Fara membru asignat",
+            Prioritate = Prioritate.Low,
+            Status = StatusIssue.ToDo,
+            DataEstimata = FixedEstimate,
+            ProiectId = proiect.Id,
+            MembruEchipaId = 0
+        };
+
+        await _database.SaveIssueAsync(issue);
+
+        var loaded = await _database.GetIssueAsync(issue.Id);
+        Assert.NotNull(loaded);
+        Assert.Equal(0, loaded.MembruEchipaId);
+
+        // Also verify it can be updated while still unassigned
+        issue.Status = StatusIssue.InProgress;
+        await _database.SaveIssueAsync(issue);
+
+        var updated = await _database.GetIssueAsync(issue.Id);
+        Assert.NotNull(updated);
+        Assert.Equal(StatusIssue.InProgress, updated.Status);
+        Assert.Equal(0, updated.MembruEchipaId);
+    }
+
     private async Task<Proiect> CreateProiectAsync(string nume)
     {
         var proiect = new Proiect

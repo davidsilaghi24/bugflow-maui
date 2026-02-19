@@ -60,6 +60,7 @@ public partial class RaportPage : ContentPage
         }
         catch (Exception ex)
         {
+            App.LogError("Nu s-a putut incarca raportul", ex);
             await DisplayAlert("Eroare", $"Nu s-a putut incarca raportul: {ex.Message}", "OK");
         }
         finally
@@ -86,13 +87,4 @@ public partial class RaportPage : ContentPage
         Prioritate.Low => Color.FromArgb("#4CAF50"),
         _ => Color.FromArgb("#9E9E9E")
     };
-}
-
-public class RaportItem
-{
-    public string StatusNume { get; set; } = string.Empty;
-    public int Count { get; set; }
-    public string CountText { get; set; } = string.Empty;
-    public int Procent { get; set; }
-    public Color Culoare { get; set; } = Colors.Grey;
 }

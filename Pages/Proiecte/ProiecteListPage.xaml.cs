@@ -30,6 +30,7 @@ public partial class ProiecteListPage : ContentPage
         }
         catch (Exception ex)
         {
+            App.LogError("Nu s-au putut incarca proiectele", ex);
             await DisplayAlert("Eroare", $"Nu s-au putut incarca proiectele: {ex.Message}", "OK");
             _allProiecte.Clear();
             listView.ItemsSource = _allProiecte;

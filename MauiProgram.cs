@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using BugFlow.Data;
+using Microsoft.Extensions.Logging;
 
 namespace BugFlow;
 
@@ -14,6 +15,11 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
+
+		var dbPath = Path.Combine(
+			Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+			"bugflow.db3");
+		builder.Services.AddSingleton(new BugFlowDatabase(dbPath));
 
 #if DEBUG
 		builder.Logging.AddDebug();
