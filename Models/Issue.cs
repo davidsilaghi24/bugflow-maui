@@ -41,7 +41,7 @@ public class Issue
     public Proiect? Proiect { get; set; }
 
     [ForeignKey(typeof(MembruEchipa))]
-    public int MembruEchipaId { get; set; }
+    public int? MembruEchipaId { get; set; }
 
     [ManyToOne]
     public MembruEchipa? MembruEchipa { get; set; }

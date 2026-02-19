@@ -83,7 +83,7 @@ public class DatabaseTests : IAsyncLifetime
             Status = StatusIssue.ToDo,
             DataEstimata = FixedEstimate,
             ProiectId = 999999,
-            MembruEchipaId = 0
+            MembruEchipaId = null
         };
 
         await Assert.ThrowsAsync<InvalidOperationException>(() => _database.SaveIssueAsync(invalidProjectIssue));
@@ -379,7 +379,7 @@ public class DatabaseTests : IAsyncLifetime
         var remainingComments = await _database.GetComentariiByIssueAsync(issue.Id);
 
         Assert.NotNull(remainingIssue);
-        Assert.Equal(0, remainingIssue.MembruEchipaId);
+        Assert.Null(remainingIssue.MembruEchipaId);
         Assert.Empty(remainingComments);
     }
 
@@ -522,7 +522,7 @@ public class DatabaseTests : IAsyncLifetime
     [Fact]
     public async Task Test_SaveIssue_WithNoMemberAssigned_IsAllowed()
     {
-        // MembruEchipaId = 0 means unassigned — this is the state left by DeleteMembruAsync.
+        // MembruEchipaId = null means unassigned — this is the state left by DeleteMembruAsync.
         // If this contract breaks, the delete-member logic silently corrupts data.
         var proiect = await CreateProiectAsync("P-Unassigned");
 
@@ -534,14 +534,14 @@ public class DatabaseTests : IAsyncLifetime
             Status = StatusIssue.ToDo,
             DataEstimata = FixedEstimate,
             ProiectId = proiect.Id,
-            MembruEchipaId = 0
+            MembruEchipaId = null
         };
 
         await _database.SaveIssueAsync(issue);
 
         var loaded = await _database.GetIssueAsync(issue.Id);
         Assert.NotNull(loaded);
-        Assert.Equal(0, loaded.MembruEchipaId);
+        Assert.Null(loaded.MembruEchipaId);
 
         // Also verify it can be updated while still unassigned
         issue.Status = StatusIssue.InProgress;
@@ -550,7 +550,7 @@ public class DatabaseTests : IAsyncLifetime
         var updated = await _database.GetIssueAsync(issue.Id);
         Assert.NotNull(updated);
         Assert.Equal(StatusIssue.InProgress, updated.Status);
-        Assert.Equal(0, updated.MembruEchipaId);
+        Assert.Null(updated.MembruEchipaId);
     }
 
     private async Task<Proiect> CreateProiectAsync(string nume)

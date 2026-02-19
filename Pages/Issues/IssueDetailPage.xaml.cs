@@ -49,7 +49,7 @@ public partial class IssueDetailPage : ContentPage
 
             var members = await App.Database.GetMembriAsync();
             membruPicker.ItemsSource = members;
-            if (_issue.MembruEchipaId != 0)
+            if (_issue.MembruEchipaId.HasValue)
             {
                 var selectedMember = members.FirstOrDefault(m => m.Id == _issue.MembruEchipaId);
                 membruPicker.SelectedItem = selectedMember;
@@ -118,7 +118,7 @@ public partial class IssueDetailPage : ContentPage
         _issue.Status = statusPicker.SelectedItem is StatusIssue status ? status : StatusIssue.ToDo;
         _issue.DataEstimata = dataEstimataPicker.Date;
         _issue.ProiectId = proiect.Id;
-        _issue.MembruEchipaId = membruPicker.SelectedItem is MembruEchipa membru ? membru.Id : 0;
+        _issue.MembruEchipaId = membruPicker.SelectedItem is MembruEchipa membru ? membru.Id : null;
 
         await App.Database.SaveIssueAsync(_issue);
 

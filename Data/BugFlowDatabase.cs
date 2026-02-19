@@ -102,7 +102,7 @@ public class BugFlowDatabase
         var assignedIssues = await _database.Table<Issue>().Where(i => i.MembruEchipaId == membru.Id).ToListAsync();
         foreach (var issue in assignedIssues)
         {
-            issue.MembruEchipaId = 0;
+            issue.MembruEchipaId = null;
             await _database.UpdateAsync(issue);
         }
 
@@ -226,7 +226,7 @@ public class BugFlowDatabase
             throw new InvalidOperationException("Proiect inexistent pentru issue.");
         }
 
-        if (issue.MembruEchipaId > 0)
+        if (issue.MembruEchipaId.HasValue)
         {
             var membruExists = await _database.Table<MembruEchipa>().Where(m => m.Id == issue.MembruEchipaId).CountAsync() > 0;
             if (!membruExists)

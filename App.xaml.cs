@@ -104,7 +104,7 @@ public partial class App : Application
                     Status = Enum.Parse<StatusIssue>(issueSeed.Status, ignoreCase: true),
                     DataEstimata = issueSeed.DataEstimata,
                     ProiectId = proiect.Id,
-                    MembruEchipaId = membriByKey.TryGetValue(issueSeed.MembruKey, out var membru) ? membru.Id : 0
+                    MembruEchipaId = membriByKey.TryGetValue(issueSeed.MembruKey, out var membru) ? membru.Id : null
                 };
 
                 await Database.SaveIssueAsync(issue);
