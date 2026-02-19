@@ -17,8 +17,8 @@ public partial class MembruDetailPage : ContentPage
         rolPicker.ItemsSource = Enum.GetValues<Rol>().Cast<object>().ToList();
         rolPicker.SelectedItem = membru.Rol;
 
-        seniorityPicker.ItemsSource = Enum.GetNames(typeof(Seniority));
-        seniorityPicker.SelectedItem = membru.Seniority.ToString();
+        seniorityPicker.ItemsSource = Enum.GetValues<Seniority>().Cast<object>().ToList();
+        seniorityPicker.SelectedItem = membru.Seniority;
 
         emailEntry.Text = membru.Email;
         numeEntry.Text = membru.NumeComplet;
@@ -46,8 +46,7 @@ public partial class MembruDetailPage : ContentPage
         _membru.Email = emailEntry.Text?.Trim() ?? string.Empty;
         _membru.Rol = rolPicker.SelectedItem is Rol rol ? rol : Rol.Developer;
 
-        var seniorityText = seniorityPicker.SelectedItem?.ToString();
-        _membru.Seniority = Enum.TryParse(seniorityText, out Seniority seniority) ? seniority : Seniority.Junior;
+        _membru.Seniority = seniorityPicker.SelectedItem is Seniority seniority ? seniority : Seniority.Junior;
 
         await App.Database.SaveMembruAsync(_membru);
         await Navigation.PopAsync();

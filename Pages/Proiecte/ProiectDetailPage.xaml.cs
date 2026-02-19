@@ -15,8 +15,8 @@ public partial class ProiectDetailPage : ContentPage
 
         Title = proiect.Id == 0 ? "Proiect nou" : "Editare proiect";
 
-        statusPicker.ItemsSource = Enum.GetNames(typeof(StatusProiect));
-        statusPicker.SelectedItem = proiect.Status.ToString();
+        statusPicker.ItemsSource = Enum.GetValues<StatusProiect>().Cast<object>().ToList();
+        statusPicker.SelectedItem = proiect.Status;
 
         numeEntry.Text = proiect.Nume;
         descriereEditor.Text = proiect.Descriere;
@@ -48,10 +48,7 @@ public partial class ProiectDetailPage : ContentPage
         _proiect.DataStart = dataStartPicker.Date;
         _proiect.DataDeadline = dataDeadlinePicker.Date;
 
-        var statusText = statusPicker.SelectedItem?.ToString();
-        _proiect.Status = Enum.TryParse(statusText, out StatusProiect status)
-            ? status
-            : StatusProiect.Activ;
+        _proiect.Status = statusPicker.SelectedItem is StatusProiect status ? status : StatusProiect.Activ;
 
         await App.Database.SaveProiectAsync(_proiect);
 
