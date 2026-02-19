@@ -60,7 +60,7 @@ public partial class RaportPage : ContentPage
         }
         catch (Exception ex)
         {
-            App.LogError("Nu s-a putut incarca raportul", ex);
+            System.Diagnostics.Debug.WriteLine($"Nu s-a putut incarca raportul: {ex}");
             await DisplayAlert("Eroare", $"Nu s-a putut incarca raportul: {ex.Message}", "OK");
         }
         finally

@@ -31,13 +31,8 @@ public partial class App : Application
         }
         catch (Exception ex)
         {
-            LogError("Initialization error", ex);
+            System.Diagnostics.Debug.WriteLine($"Initialization error: {ex}");
         }
-    }
-
-    public static void LogError(string context, Exception ex)
-    {
-        System.Diagnostics.Debug.WriteLine($"{context}: {ex}");
     }
 
     private static async Task SeedDataAsync()

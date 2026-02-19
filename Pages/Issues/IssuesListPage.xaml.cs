@@ -30,7 +30,7 @@ public partial class IssuesListPage : ContentPage
         }
         catch (Exception ex)
         {
-            App.LogError("Nu s-au putut incarca issue-urile", ex);
+            System.Diagnostics.Debug.WriteLine($"Nu s-au putut incarca issue-urile: {ex}");
             await DisplayAlert("Eroare", $"Nu s-au putut incarca issue-urile: {ex.Message}", "OK");
             _allIssues.Clear();
             listView.ItemsSource = _allIssues;

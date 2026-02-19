@@ -43,7 +43,7 @@ public partial class ComentariiListPage : ContentPage
         }
         catch (Exception ex)
         {
-            App.LogError("Nu s-au putut incarca comentariile", ex);
+            System.Diagnostics.Debug.WriteLine($"Nu s-au putut incarca comentariile: {ex}");
             await DisplayAlert("Eroare", $"Nu s-au putut incarca comentariile: {ex.Message}", "OK");
             _allComentarii.Clear();
             listView.ItemsSource = _allComentarii;

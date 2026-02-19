@@ -60,7 +60,7 @@ public partial class IssueDetailPage : ContentPage
         }
         catch (Exception ex)
         {
-            App.LogError("Nu s-au putut incarca datele issue", ex);
+            System.Diagnostics.Debug.WriteLine($"Nu s-au putut incarca datele issue: {ex}");
             await DisplayAlert("Eroare", $"Nu s-au putut incarca datele: {ex.Message}", "OK");
         }
         finally
