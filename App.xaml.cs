@@ -20,10 +20,10 @@ public partial class App : Application
         InitializeComponent();
         MainPage = new AppShell();
 
-        _ = InitializeAsync(); // fire-and-forget; errors land in Debug output, not the UI
+        _ = InitializeAsync();
     }
 
-    private static async Task InitializeAsync()
+    private async Task InitializeAsync()
     {
         try
         {
@@ -32,6 +32,11 @@ public partial class App : Application
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"Initialization error: {ex}");
+            await MainThread.InvokeOnMainThreadAsync(async () =>
+            {
+                if (MainPage != null)
+                    await MainPage.DisplayAlert("Eroare la pornire", "Datele initiale nu au putut fi incarcate.", "OK");
+            });
         }
     }
 
