@@ -39,7 +39,7 @@ public partial class RaportPage : ContentPage
                     Count = stat.Count,
                     CountText = stat.Count == 1 ? "1 issue" : $"{stat.Count} issue-uri",
                     Procent = stat.Procent,
-                    Culoare = StatusColor(stat.Key)
+                    Culoare = StatusIssueColorConverter.GetColor(stat.Key)
                 });
             }
             statusCollection.ItemsSource = statusGroups;
@@ -53,7 +53,7 @@ public partial class RaportPage : ContentPage
                     Count = stat.Count,
                     CountText = stat.Count == 1 ? "1 issue" : $"{stat.Count} issue-uri",
                     Procent = stat.Procent,
-                    Culoare = PriorityColor(stat.Key)
+                    Culoare = PriorityColorConverter.GetColor(stat.Key)
                 });
             }
             priorityCollection.ItemsSource = priorityGroups;
@@ -71,20 +71,4 @@ public partial class RaportPage : ContentPage
         }
     }
 
-    private static Color StatusColor(StatusIssue status) => status switch
-    {
-        StatusIssue.ToDo => Color.FromArgb("#9E9E9E"),
-        StatusIssue.InProgress => Color.FromArgb("#2196F3"),
-        StatusIssue.Review => Color.FromArgb("#FF9800"),
-        StatusIssue.Done => Color.FromArgb("#4CAF50"),
-        _ => Color.FromArgb("#9E9E9E")
-    };
-
-    private static Color PriorityColor(Prioritate prioritate) => prioritate switch
-    {
-        Prioritate.High => Color.FromArgb("#F44336"),
-        Prioritate.Medium => Color.FromArgb("#FF9800"),
-        Prioritate.Low => Color.FromArgb("#4CAF50"),
-        _ => Color.FromArgb("#9E9E9E")
-    };
 }
