@@ -46,6 +46,3 @@ dotnet test BugFlow.Tests/BugFlow.Tests.csproj
 
 Pentru rulare MAUI pe un target specific (ex. Android), proiectul poate fi lansat din Visual Studio/Rider sau prin target-ul corespunzător din CLI.
 
-## Status
-
-Proiect funcțional, pregătit pentru prezentare.

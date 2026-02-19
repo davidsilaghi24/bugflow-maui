@@ -10,9 +10,7 @@ public partial class App : Application
     private static bool _isSeeded;
     private static BugFlowDatabase _database = null!;
 
-    // Singleton registered in MauiProgram.cs and injected here by the MAUI DI container.
-    // Pages access it via this static property; for a larger app each page would receive it
-    // via constructor injection instead.
+    // DI-managed singleton; pages access via this static property.
     public static BugFlowDatabase Database => _database;
 
     public App(BugFlowDatabase database)
