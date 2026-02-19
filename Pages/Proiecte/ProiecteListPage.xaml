@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BugFlow.Pages.Proiecte.ProiecteListPage"
+             Title="Proiecte"
+             BackgroundColor="{StaticResource PageBackground}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Adauga" Clicked="OnAdaugaClicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto, *">
+        <SearchBar x:Name="searchBar" Placeholder="Cauta proiect..."
+                   TextChanged="OnSearchTextChanged"
+                   CancelButtonColor="{StaticResource Primary}"
+                   BackgroundColor="{StaticResource CardBackground}" />
+
+        <ActivityIndicator x:Name="loadingIndicator" Grid.Row="1"
+                           IsRunning="False" IsVisible="False"
+                           Color="{StaticResource Primary}"
+                           VerticalOptions="Center" HorizontalOptions="Center"
+                           HeightRequest="50" WidthRequest="50" />
+
+        <VerticalStackLayout x:Name="emptyState" Grid.Row="1"
+                             IsVisible="False"
+                             VerticalOptions="Center" HorizontalOptions="Center"
+                             Spacing="8" Padding="30">
+            <Label Text="&#x1F4C2;" FontSize="48" HorizontalTextAlignment="Center" />
+            <Label Text="Nu exista inca proiecte" FontSize="18" FontAttributes="Bold"
+                   TextColor="{StaticResource Gray600}" HorizontalTextAlignment="Center" />
+            <Label Text="Apasa Adauga pentru a crea primul proiect."
+                   FontSize="14" TextColor="{StaticResource Gray400}" HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+
+        <RefreshView Grid.Row="1" x:Name="refreshView" Refreshing="OnRefreshing">
+            <ListView x:Name="listView"
+                      HasUnevenRows="True"
+                      ItemSelected="OnItemSelected"
+                      SeparatorVisibility="None"
+                      BackgroundColor="Transparent">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Margin="12,6" Padding="0" CornerRadius="12"
+                                   BackgroundColor="{StaticResource CardBackground}"
+                                   BorderColor="Transparent" HasShadow="True">
+                                <Grid Padding="16,14" ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto, Auto">
+                                    <Label Text="{Binding Nume}" FontSize="17" FontAttributes="Bold"
+                                           TextColor="{StaticResource Gray900}" />
+                                    <Label Grid.Row="1" Text="{Binding Descriere}" FontSize="13"
+                                           TextColor="{StaticResource Gray500}"
+                                           LineBreakMode="TailTruncation" MaxLines="2"
+                                           Margin="0,4,0,0" />
+                                    <Label Grid.Row="2" FontSize="11" TextColor="{StaticResource Gray400}"
+                                           Margin="0,6,0,0">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0:dd MMM yyyy} — {1:dd MMM yyyy}">
+                                                <Binding Path="DataStart" />
+                                                <Binding Path="DataDeadline" />
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                    <Frame Grid.Column="1" Grid.RowSpan="3" Padding="10,5"
+                                           CornerRadius="14" BorderColor="Transparent"
+                                           BackgroundColor="{Binding Status, Converter={StaticResource StatusColorConverter}}"
+                                           VerticalOptions="Center">
+                                        <Label Text="{Binding Status}" FontSize="12" TextColor="White" />
+                                    </Frame>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:BugFlow.Behaviors"
+             x:Class="BugFlow.Pages.Comentarii.ComentariuDetailPage"
+             Title="Detalii Comentariu"
+             BackgroundColor="{StaticResource PageBackground}">
+
+    <Grid>
+        <ActivityIndicator x:Name="loadingIndicator"
+                           IsRunning="False" IsVisible="False"
+                           Color="{StaticResource Primary}"
+                           VerticalOptions="Center" HorizontalOptions="Center"
+                           HeightRequest="50" WidthRequest="50" />
+
+        <ScrollView x:Name="formContent" Padding="16" IsVisible="False">
+            <VerticalStackLayout Spacing="14">
+
+                <Frame Padding="16" CornerRadius="12" BackgroundColor="{StaticResource CardBackground}"
+                       BorderColor="Transparent" HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Comentariu *" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                        <Editor x:Name="textEditor" Placeholder="Scrie comentariul..."
+                                HeightRequest="150" TextChanged="OnFormChanged">
+                            <Editor.Behaviors>
+                                <behaviors:ValidationBehavior />
+                            </Editor.Behaviors>
+                        </Editor>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Padding="16" CornerRadius="12" BackgroundColor="{StaticResource CardBackground}"
+                       BorderColor="Transparent" HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Autor *" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                        <Picker x:Name="autorPicker" Title="Selecteaza autorul"
+                                ItemDisplayBinding="{Binding NumeComplet}"
+                                SelectedIndexChanged="OnFormChanged" />
+
+                        <BoxView HeightRequest="1" Color="{StaticResource SurfaceBorder}" />
+
+                        <Label Text="Issue *" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                        <Picker x:Name="issuePicker" Title="Selecteaza issue-ul"
+                                ItemDisplayBinding="{Binding Titlu}"
+                                SelectedIndexChanged="OnFormChanged" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                    <Button x:Name="saveButton" Text="Salveaza"
+                            Clicked="OnSaveClicked" BackgroundColor="{StaticResource Success}" TextColor="White"
+                            CornerRadius="10" IsEnabled="False" />
+                    <Button Grid.Column="1" Text="Sterge"
+                            Clicked="OnDeleteClicked" BackgroundColor="{StaticResource Danger}" TextColor="White"
+                            CornerRadius="10" />
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

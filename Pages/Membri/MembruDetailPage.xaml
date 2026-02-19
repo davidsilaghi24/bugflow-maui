@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:BugFlow.Behaviors"
+             x:Class="BugFlow.Pages.Membri.MembruDetailPage"
+             Title="Detalii Membru"
+             BackgroundColor="{StaticResource PageBackground}">
+
+    <Grid>
+        <ActivityIndicator x:Name="loadingIndicator"
+                           IsRunning="False" IsVisible="False"
+                           Color="{StaticResource Primary}"
+                           VerticalOptions="Center" HorizontalOptions="Center"
+                           HeightRequest="50" WidthRequest="50" />
+
+        <ScrollView x:Name="formContent" Padding="16" IsVisible="True">
+            <VerticalStackLayout Spacing="14">
+
+                <Frame Padding="16" CornerRadius="12" BackgroundColor="{StaticResource CardBackground}"
+                       BorderColor="Transparent" HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Nume Complet *" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                        <Entry x:Name="numeEntry" Placeholder="Numele complet"
+                               TextChanged="OnFormChanged">
+                            <Entry.Behaviors>
+                                <behaviors:ValidationBehavior />
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Text="Email *" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                        <Entry x:Name="emailEntry" Placeholder="email@exemplu.ro"
+                               Keyboard="Email" TextChanged="OnFormChanged">
+                            <Entry.Behaviors>
+                                <behaviors:EmailValidationBehavior />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Padding="16" CornerRadius="12" BackgroundColor="{StaticResource CardBackground}"
+                       BorderColor="Transparent" HasShadow="True">
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                        <VerticalStackLayout>
+                            <Label Text="Rol" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                            <Picker x:Name="rolPicker" Title="Selecteaza rolul" ItemDisplayBinding="{Binding ., Converter={StaticResource RolToStringConverter}}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label Text="Senioritate" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                            <Picker x:Name="seniorityPicker" Title="Selecteaza nivelul" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                    <Button x:Name="saveButton" Text="Salveaza"
+                            Clicked="OnSaveClicked" BackgroundColor="{StaticResource Success}" TextColor="White"
+                            CornerRadius="10" IsEnabled="False" />
+                    <Button Grid.Column="1" Text="Sterge"
+                            Clicked="OnDeleteClicked" BackgroundColor="{StaticResource Danger}" TextColor="White"
+                            CornerRadius="10" />
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:BugFlow.Behaviors"
+             x:Class="BugFlow.Pages.Proiecte.ProiectDetailPage"
+             Title="Detalii Proiect"
+             BackgroundColor="{StaticResource PageBackground}">
+
+    <Grid>
+        <ActivityIndicator x:Name="loadingIndicator"
+                           IsRunning="False" IsVisible="False"
+                           Color="{StaticResource Primary}"
+                           VerticalOptions="Center" HorizontalOptions="Center"
+                           HeightRequest="50" WidthRequest="50" />
+
+        <ScrollView x:Name="formContent" Padding="16" IsVisible="True">
+            <VerticalStackLayout Spacing="14">
+
+                <Frame Padding="16" CornerRadius="12" BackgroundColor="{StaticResource CardBackground}"
+                       BorderColor="Transparent" HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Nume *" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                        <Entry x:Name="numeEntry" Placeholder="Numele proiectului"
+                               TextChanged="OnFormChanged">
+                            <Entry.Behaviors>
+                                <behaviors:ValidationBehavior />
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Text="Descriere *" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                        <Editor x:Name="descriereEditor" Placeholder="Descriere detaliata"
+                                HeightRequest="100" TextChanged="OnFormChanged">
+                            <Editor.Behaviors>
+                                <behaviors:ValidationBehavior />
+                            </Editor.Behaviors>
+                        </Editor>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Padding="16" CornerRadius="12" BackgroundColor="{StaticResource CardBackground}"
+                       BorderColor="Transparent" HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                            <VerticalStackLayout>
+                                <Label Text="Data Inceput" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                                <DatePicker x:Name="dataStartPicker" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label Text="Termen Limita" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                                <DatePicker x:Name="dataDeadlinePicker">
+                                    <DatePicker.Behaviors>
+                                        <behaviors:FutureDateValidationBehavior />
+                                    </DatePicker.Behaviors>
+                                </DatePicker>
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <Label Text="Stare" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                        <Picker x:Name="statusPicker" Title="Selecteaza starea" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                    <Button x:Name="saveButton" Text="Salveaza"
+                            Clicked="OnSaveClicked" BackgroundColor="{StaticResource Success}" TextColor="White"
+                            CornerRadius="10" IsEnabled="False" />
+                    <Button Grid.Column="1" Text="Sterge"
+                            Clicked="OnDeleteClicked" BackgroundColor="{StaticResource Danger}" TextColor="White"
+                            CornerRadius="10" />
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

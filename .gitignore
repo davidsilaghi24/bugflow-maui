@@ -1,0 +1,39 @@
+# Build output
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio / Rider
+.vs/
+.idea/
+
+# VS Code
+.vscode/
+
+# MAUI platform build outputs
+Platforms/**/bin/
+Platforms/**/obj/
+
+# Test and coverage output
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# NuGet
+*.nupkg
+*.snupkg
+
+# Local databases
+*.db
+*.db3
+*.sqlite
+
+# OS files
+.DS_Store
+Thumbs.db

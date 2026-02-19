@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="BugFlow.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:proiecte="clr-namespace:BugFlow.Pages.Proiecte"
+    xmlns:membri="clr-namespace:BugFlow.Pages.Membri"
+    xmlns:issues="clr-namespace:BugFlow.Pages.Issues"
+    xmlns:comentarii="clr-namespace:BugFlow.Pages.Comentarii"
+    xmlns:raport="clr-namespace:BugFlow.Pages.Raport"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="#1E1E2E"
+    Shell.TabBarTitleColor="#BBDEFB"
+    Shell.TabBarUnselectedColor="#6E6E6E"
+    Shell.TabBarForegroundColor="{StaticResource Primary}"
+    Title="BugFlow">
+
+    <TabBar>
+        <ShellContent Title="Proiecte" Route="ProiecteList"
+                      ContentTemplate="{DataTemplate proiecte:ProiecteListPage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#x1F4C1;" Size="22" />
+            </ShellContent.Icon>
+        </ShellContent>
+
+        <ShellContent Title="Echipa" Route="MembriList"
+                      ContentTemplate="{DataTemplate membri:MembriListPage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#x1F465;" Size="22" />
+            </ShellContent.Icon>
+        </ShellContent>
+
+        <ShellContent Title="Issue-uri" Route="IssuesList"
+                      ContentTemplate="{DataTemplate issues:IssuesListPage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#x1F41B;" Size="22" />
+            </ShellContent.Icon>
+        </ShellContent>
+
+        <ShellContent Title="Comentarii" Route="ComentariiList"
+                      ContentTemplate="{DataTemplate comentarii:ComentariiListPage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#x1F4AC;" Size="22" />
+            </ShellContent.Icon>
+        </ShellContent>
+
+        <ShellContent Title="Raport" Route="Raport"
+                      ContentTemplate="{DataTemplate raport:RaportPage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#x1F4CA;" Size="22" />
+            </ShellContent.Icon>
+        </ShellContent>
+    </TabBar>
+
+</Shell>
