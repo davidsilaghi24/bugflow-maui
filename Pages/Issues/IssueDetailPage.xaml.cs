@@ -101,7 +101,7 @@ public partial class IssueDetailPage : ContentPage
 
     private async void OnComentariiClicked(object? sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ComentariiListPage(_issue.Id, _issue.Titlu));
+        await Navigation.PushAsync(new ComentariiListPage(App.Database, _issue.Id, _issue.Titlu));
     }
 
     private async void OnSaveClicked(object? sender, EventArgs e)

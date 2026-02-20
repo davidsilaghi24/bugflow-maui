@@ -1,3 +1,4 @@
+using BugFlow.Data;
 using BugFlow.Models;
 using BugFlow.Pages;
 
@@ -5,10 +6,12 @@ namespace BugFlow.Pages.Proiecte;
 
 public partial class ProiecteListPage : ContentPage
 {
+    private readonly BugFlowDatabase _db;
     private List<Proiect> _allProiecte = new();
 
-    public ProiecteListPage()
+    public ProiecteListPage(BugFlowDatabase db)
     {
+        _db = db;
         InitializeComponent();
     }
 
@@ -25,7 +28,7 @@ public partial class ProiecteListPage : ContentPage
 
         try
         {
-            _allProiecte = await App.Database.GetProiecteAsync();
+            _allProiecte = await _db.GetProiecteAsync();
             ApplyFilter();
         }
         catch (Exception ex)
@@ -68,7 +71,7 @@ public partial class ProiecteListPage : ContentPage
 
     private async void OnAdaugaClicked(object? sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ProiectDetailPage(new Proiect()));
+        await Navigation.PushAsync(new ProiectDetailPage(_db, new Proiect()));
     }
 
     private async void OnItemSelected(object? sender, SelectedItemChangedEventArgs e)
@@ -76,7 +79,7 @@ public partial class ProiecteListPage : ContentPage
         if (e.SelectedItem is Proiect proiect)
         {
             listView.SelectedItem = null;
-            await Navigation.PushAsync(new ProiectDetailPage(proiect));
+            await Navigation.PushAsync(new ProiectDetailPage(_db, proiect));
         }
     }
 }

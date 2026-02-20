@@ -9,8 +9,6 @@ public partial class App : Application
     private static readonly SemaphoreSlim SeedSemaphore = new(1, 1);
     private static bool _isSeeded;
     private static BugFlowDatabase _database = null!;
-
-    // DI-managed singleton; pages access via this static property.
     public static BugFlowDatabase Database => _database;
 
     public App(BugFlowDatabase database)

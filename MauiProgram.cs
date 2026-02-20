@@ -1,4 +1,9 @@
 ﻿using BugFlow.Data;
+using BugFlow.Pages.Comentarii;
+using BugFlow.Pages.Issues;
+using BugFlow.Pages.Membri;
+using BugFlow.Pages.Proiecte;
+using BugFlow.Pages.Raport;
 using Microsoft.Extensions.Logging;
 
 namespace BugFlow;
@@ -20,6 +25,12 @@ public static class MauiProgram
 			Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
 			"bugflow.db3");
 		builder.Services.AddSingleton(new BugFlowDatabase(dbPath));
+
+		builder.Services.AddTransient<ProiecteListPage>();
+		builder.Services.AddTransient<MembriListPage>();
+		builder.Services.AddTransient<IssuesListPage>();
+		builder.Services.AddTransient<ComentariiListPage>();
+		builder.Services.AddTransient<RaportPage>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

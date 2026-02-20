@@ -1,4 +1,5 @@
 using BugFlow.Behaviors;
+using BugFlow.Data;
 using BugFlow.Domain;
 using BugFlow.Models;
 
@@ -6,10 +7,12 @@ namespace BugFlow.Pages.Proiecte;
 
 public partial class ProiectDetailPage : ContentPage
 {
+    private readonly BugFlowDatabase _db;
     private readonly Proiect _proiect;
 
-    public ProiectDetailPage(Proiect proiect)
+    public ProiectDetailPage(BugFlowDatabase db, Proiect proiect)
     {
+        _db = db;
         InitializeComponent();
         _proiect = proiect;
 
@@ -50,7 +53,7 @@ public partial class ProiectDetailPage : ContentPage
 
         _proiect.Status = statusPicker.SelectedItem is StatusProiect status ? status : StatusProiect.Activ;
 
-        await App.Database.SaveProiectAsync(_proiect);
+        await _db.SaveProiectAsync(_proiect);
 
         await Navigation.PopAsync();
     }
@@ -71,7 +74,7 @@ public partial class ProiectDetailPage : ContentPage
 
         if (confirm)
         {
-            await App.Database.DeleteProiectAsync(_proiect);
+            await _db.DeleteProiectAsync(_proiect);
             await Navigation.PopAsync();
         }
     }

@@ -1,3 +1,4 @@
+using BugFlow.Data;
 using BugFlow.Models;
 using BugFlow.Pages;
 
@@ -5,10 +6,12 @@ namespace BugFlow.Pages.Issues;
 
 public partial class IssuesListPage : ContentPage
 {
+    private readonly BugFlowDatabase _db;
     private List<Issue> _allIssues = new();
 
-    public IssuesListPage()
+    public IssuesListPage(BugFlowDatabase db)
     {
+        _db = db;
         InitializeComponent();
     }
 
@@ -25,7 +28,7 @@ public partial class IssuesListPage : ContentPage
 
         try
         {
-            _allIssues = await App.Database.GetIssuesAsync();
+            _allIssues = await _db.GetIssuesAsync();
             ApplyFilter();
         }
         catch (Exception ex)

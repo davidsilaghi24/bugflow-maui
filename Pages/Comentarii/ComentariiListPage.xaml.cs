@@ -1,3 +1,4 @@
+using BugFlow.Data;
 using BugFlow.Models;
 using BugFlow.Pages;
 
@@ -5,19 +6,22 @@ namespace BugFlow.Pages.Comentarii;
 
 public partial class ComentariiListPage : ContentPage
 {
+    private readonly BugFlowDatabase _db;
     private readonly int? _issueId;
     private List<Comentariu> _allComentarii = new();
 
-    public ComentariiListPage()
+    public ComentariiListPage(BugFlowDatabase db)
     {
-        InitializeComponent();
+        _db = db;
         _issueId = null;
+        InitializeComponent();
     }
 
-    public ComentariiListPage(int issueId, string issueTitlu)
+    public ComentariiListPage(BugFlowDatabase db, int issueId, string issueTitlu)
     {
-        InitializeComponent();
+        _db = db;
         _issueId = issueId;
+        InitializeComponent();
         Title = $"Comentarii - {issueTitlu}";
         emptyLabel.Text = "Nu exista comentarii pentru acest issue";
     }
@@ -36,8 +40,8 @@ public partial class ComentariiListPage : ContentPage
         try
         {
             _allComentarii = _issueId.HasValue
-                ? await App.Database.GetComentariiByIssueAsync(_issueId.Value)
-                : await App.Database.GetComentariiAsync();
+                ? await _db.GetComentariiByIssueAsync(_issueId.Value)
+                : await _db.GetComentariiAsync();
 
             ApplyFilter();
         }

@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BugFlow.csproj" />
+    <ProjectReference Include="..\BugFlow.csproj" ExcludeAssets="build;buildTransitive" />
   </ItemGroup>
 
   <ItemGroup>

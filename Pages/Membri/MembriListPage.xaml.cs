@@ -1,3 +1,4 @@
+using BugFlow.Data;
 using BugFlow.Models;
 using BugFlow.Pages;
 
@@ -5,10 +6,12 @@ namespace BugFlow.Pages.Membri;
 
 public partial class MembriListPage : ContentPage
 {
+    private readonly BugFlowDatabase _db;
     private List<MembruEchipa> _allMembers = new();
 
-    public MembriListPage()
+    public MembriListPage(BugFlowDatabase db)
     {
+        _db = db;
         InitializeComponent();
     }
 
@@ -25,7 +28,7 @@ public partial class MembriListPage : ContentPage
 
         try
         {
-            _allMembers = await App.Database.GetMembriAsync();
+            _allMembers = await _db.GetMembriAsync();
             ApplyFilter();
         }
         catch (Exception ex)

@@ -1,4 +1,5 @@
 using BugFlow.Converters;
+using BugFlow.Data;
 using BugFlow.Domain;
 using BugFlow.Models;
 
@@ -6,11 +7,13 @@ namespace BugFlow.Pages.Raport;
 
 public partial class RaportPage : ContentPage
 {
+    private readonly BugFlowDatabase _db;
     private static readonly StatusIssueToStringConverter StatusConverter = new();
     private static readonly PrioritateToStringConverter PrioritateConverter = new();
 
-    public RaportPage()
+    public RaportPage(BugFlowDatabase db)
     {
+        _db = db;
         InitializeComponent();
     }
 
@@ -24,7 +27,7 @@ public partial class RaportPage : ContentPage
 
         try
         {
-            var issues = await App.Database.GetIssuesAsync();
+            var issues = await _db.GetIssuesAsync();
             var total = issues.Count;
             totalLabel.Text = total.ToString();
 
