@@ -15,41 +15,46 @@
     Shell.TabBarForegroundColor="{StaticResource Primary}"
     Title="BugFlow">
 
-    <TabBar>
-        <ShellContent Title="Proiecte" Route="ProiecteList"
-                      ContentTemplate="{DataTemplate proiecte:ProiecteListPage}">
-            <ShellContent.Icon>
+    <TabBar Route="MainTabs">
+        <Tab Title="Proiecte" Route="ProiecteTab">
+            <Tab.Icon>
                 <FontImageSource Glyph="&#x1F4C1;" Size="22" />
-            </ShellContent.Icon>
-        </ShellContent>
+            </Tab.Icon>
+            <ShellContent Route="ProiecteList"
+                          ContentTemplate="{DataTemplate proiecte:ProiecteListPage}" />
+        </Tab>
 
-        <ShellContent Title="Echipa" Route="MembriList"
-                      ContentTemplate="{DataTemplate membri:MembriListPage}">
-            <ShellContent.Icon>
+        <Tab Title="Echipa" Route="MembriTab">
+            <Tab.Icon>
                 <FontImageSource Glyph="&#x1F465;" Size="22" />
-            </ShellContent.Icon>
-        </ShellContent>
+            </Tab.Icon>
+            <ShellContent Route="MembriList"
+                          ContentTemplate="{DataTemplate membri:MembriListPage}" />
+        </Tab>
 
-        <ShellContent Title="Issue-uri" Route="IssuesList"
-                      ContentTemplate="{DataTemplate issues:IssuesListPage}">
-            <ShellContent.Icon>
+        <Tab Title="Issue-uri" Route="IssuesTab">
+            <Tab.Icon>
                 <FontImageSource Glyph="&#x1F41B;" Size="22" />
-            </ShellContent.Icon>
-        </ShellContent>
+            </Tab.Icon>
+            <ShellContent Route="IssuesList"
+                          ContentTemplate="{DataTemplate issues:IssuesListPage}" />
+        </Tab>
 
-        <ShellContent Title="Comentarii" Route="ComentariiList"
-                      ContentTemplate="{DataTemplate comentarii:ComentariiListPage}">
-            <ShellContent.Icon>
+        <Tab Title="Comentarii" Route="ComentariiTab">
+            <Tab.Icon>
                 <FontImageSource Glyph="&#x1F4AC;" Size="22" />
-            </ShellContent.Icon>
-        </ShellContent>
+            </Tab.Icon>
+            <ShellContent Route="ComentariiList"
+                          ContentTemplate="{DataTemplate comentarii:ComentariiListPage}" />
+        </Tab>
 
-        <ShellContent Title="Raport" Route="Raport"
-                      ContentTemplate="{DataTemplate raport:RaportPage}">
-            <ShellContent.Icon>
+        <Tab Title="Raport" Route="RaportTab">
+            <Tab.Icon>
                 <FontImageSource Glyph="&#x1F4CA;" Size="22" />
-            </ShellContent.Icon>
-        </ShellContent>
+            </Tab.Icon>
+            <ShellContent Route="Raport"
+                          ContentTemplate="{DataTemplate raport:RaportPage}" />
+        </Tab>
     </TabBar>
 
 </Shell>
