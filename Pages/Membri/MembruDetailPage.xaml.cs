@@ -6,6 +6,8 @@ namespace BugFlow.Pages.Membri;
 public partial class MembruDetailPage : ContentPage
 {
     private readonly MembruEchipa _membru;
+    private Rol _selectedRol;
+    private Seniority _selectedSeniority;
 
     public MembruDetailPage(MembruEchipa membru)
     {
@@ -14,11 +16,10 @@ public partial class MembruDetailPage : ContentPage
 
         Title = membru.Id == 0 ? "Membru nou" : "Editare membru";
 
-        rolPicker.ItemsSource = Enum.GetValues<Rol>().Cast<object>().ToList();
-        rolPicker.SelectedItem = membru.Rol;
-
-        seniorityPicker.ItemsSource = Enum.GetValues<Seniority>().Cast<object>().ToList();
-        seniorityPicker.SelectedItem = membru.Seniority;
+        _selectedRol = membru.Rol;
+        _selectedSeniority = membru.Seniority;
+        UpdateRolButtons();
+        UpdateSeniorityButtons();
 
         emailEntry.Text = membru.Email;
         numeEntry.Text = membru.NumeComplet;
@@ -27,6 +28,57 @@ public partial class MembruDetailPage : ContentPage
     }
 
     private void OnFormChanged(object? sender, TextChangedEventArgs e) => ValidateForm();
+
+    private void OnRolClicked(object? sender, EventArgs e)
+    {
+        if (sender == rolDeveloperBtn) _selectedRol = Rol.Developer;
+        else if (sender == rolTesterBtn) _selectedRol = Rol.Tester;
+        else if (sender == rolPMBtn) _selectedRol = Rol.PM;
+        UpdateRolButtons();
+    }
+
+    private void OnSeniorityClicked(object? sender, EventArgs e)
+    {
+        if (sender == seniorityJuniorBtn) _selectedSeniority = Seniority.Junior;
+        else if (sender == seniorityMidBtn) _selectedSeniority = Seniority.Mid;
+        else if (sender == senioritySeniorBtn) _selectedSeniority = Seniority.Senior;
+        UpdateSeniorityButtons();
+    }
+
+    private void UpdateRolButtons()
+    {
+        var active = _selectedRol switch
+        {
+            Rol.Developer => rolDeveloperBtn,
+            Rol.Tester => rolTesterBtn,
+            Rol.PM => rolPMBtn,
+            _ => rolDeveloperBtn
+        };
+        SetSegment([rolDeveloperBtn, rolTesterBtn, rolPMBtn], active);
+    }
+
+    private void UpdateSeniorityButtons()
+    {
+        var active = _selectedSeniority switch
+        {
+            Seniority.Junior => seniorityJuniorBtn,
+            Seniority.Mid => seniorityMidBtn,
+            Seniority.Senior => senioritySeniorBtn,
+            _ => seniorityJuniorBtn
+        };
+        SetSegment([seniorityJuniorBtn, seniorityMidBtn, senioritySeniorBtn], active);
+    }
+
+    private static void SetSegment(Button[] buttons, Button active)
+    {
+        var primary = (Color)Application.Current!.Resources["Primary"];
+        foreach (var btn in buttons)
+        {
+            var sel = btn == active;
+            btn.BackgroundColor = sel ? primary : Color.FromArgb("#E0E0E0");
+            btn.TextColor = sel ? Colors.White : Color.FromArgb("#444444");
+        }
+    }
 
     private void ValidateForm()
     {
@@ -44,9 +96,8 @@ public partial class MembruDetailPage : ContentPage
 
         _membru.NumeComplet = numeEntry.Text?.Trim() ?? string.Empty;
         _membru.Email = emailEntry.Text?.Trim() ?? string.Empty;
-        _membru.Rol = rolPicker.SelectedItem is Rol rol ? rol : Rol.Developer;
-
-        _membru.Seniority = seniorityPicker.SelectedItem is Seniority seniority ? seniority : Seniority.Junior;
+        _membru.Rol = _selectedRol;
+        _membru.Seniority = _selectedSeniority;
 
         await App.Database.SaveMembruAsync(_membru);
         await Navigation.PopAsync();

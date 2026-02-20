@@ -40,16 +40,19 @@
                 <Frame Padding="16" CornerRadius="12" BackgroundColor="{StaticResource CardBackground}"
                        BorderColor="Transparent" HasShadow="True">
                     <VerticalStackLayout Spacing="10">
-                        <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
-                            <VerticalStackLayout>
-                                <Label Text="Prioritate" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
-                                <Picker x:Name="prioritatePicker" Title="Selecteaza" ItemDisplayBinding="{Binding ., Converter={StaticResource PrioritateToStringConverter}}" />
-                            </VerticalStackLayout>
-                            <VerticalStackLayout Grid.Column="1">
-                                <Label Text="Stare" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
-                                <Picker x:Name="statusPicker" Title="Selecteaza" ItemDisplayBinding="{Binding ., Converter={StaticResource StatusIssueToStringConverter}}" />
-                            </VerticalStackLayout>
-                        </Grid>
+                        <Label Text="Prioritate" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                        <HorizontalStackLayout Spacing="6">
+                            <Button x:Name="prioritateLowBtn" Text="Low" Clicked="OnPrioritateClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                            <Button x:Name="prioritateMediumBtn" Text="Medium" Clicked="OnPrioritateClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                            <Button x:Name="prioritateHighBtn" Text="High" Clicked="OnPrioritateClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                        </HorizontalStackLayout>
+                        <Label Text="Stare" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                        <HorizontalStackLayout Spacing="6">
+                            <Button x:Name="statusToDoBtn" Text="To Do" Clicked="OnStatusIssueClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                            <Button x:Name="statusInProgressBtn" Text="In Progress" Clicked="OnStatusIssueClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                            <Button x:Name="statusReviewBtn" Text="Review" Clicked="OnStatusIssueClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                            <Button x:Name="statusDoneBtn" Text="Done" Clicked="OnStatusIssueClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                        </HorizontalStackLayout>
 
                         <Label Text="Data Estimata" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
                         <DatePicker x:Name="dataEstimataPicker">

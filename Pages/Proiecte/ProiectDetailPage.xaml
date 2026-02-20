@@ -56,7 +56,11 @@
                         </Grid>
 
                         <Label Text="Stare" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
-                        <Picker x:Name="statusPicker" Title="Selecteaza starea" />
+                        <HorizontalStackLayout Spacing="6">
+                            <Button x:Name="statusActivBtn" Text="Activ" Clicked="OnStatusClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                            <Button x:Name="statusInactivBtn" Text="Inactiv" Clicked="OnStatusClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                            <Button x:Name="statusFinalizatBtn" Text="Finalizat" Clicked="OnStatusClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                        </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Frame>
 

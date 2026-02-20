@@ -9,6 +9,7 @@ public partial class ProiectDetailPage : ContentPage
 {
     private readonly BugFlowDatabase _db;
     private readonly Proiect _proiect;
+    private StatusProiect _selectedStatus;
 
     public ProiectDetailPage(BugFlowDatabase db, Proiect proiect)
     {
@@ -18,8 +19,8 @@ public partial class ProiectDetailPage : ContentPage
 
         Title = proiect.Id == 0 ? "Proiect nou" : "Editare proiect";
 
-        statusPicker.ItemsSource = Enum.GetValues<StatusProiect>().Cast<object>().ToList();
-        statusPicker.SelectedItem = proiect.Status;
+        _selectedStatus = proiect.Status;
+        UpdateStatusButtons();
 
         numeEntry.Text = proiect.Nume;
         descriereEditor.Text = proiect.Descriere;
@@ -30,6 +31,37 @@ public partial class ProiectDetailPage : ContentPage
     }
 
     private void OnFormChanged(object? sender, TextChangedEventArgs e) => ValidateForm();
+
+    private void OnStatusClicked(object? sender, EventArgs e)
+    {
+        if (sender == statusActivBtn) _selectedStatus = StatusProiect.Activ;
+        else if (sender == statusInactivBtn) _selectedStatus = StatusProiect.Inactiv;
+        else if (sender == statusFinalizatBtn) _selectedStatus = StatusProiect.Finalizat;
+        UpdateStatusButtons();
+    }
+
+    private void UpdateStatusButtons()
+    {
+        var active = _selectedStatus switch
+        {
+            StatusProiect.Activ => statusActivBtn,
+            StatusProiect.Inactiv => statusInactivBtn,
+            StatusProiect.Finalizat => statusFinalizatBtn,
+            _ => statusActivBtn
+        };
+        SetSegment([statusActivBtn, statusInactivBtn, statusFinalizatBtn], active);
+    }
+
+    private static void SetSegment(Button[] buttons, Button active)
+    {
+        var primary = (Color)Application.Current!.Resources["Primary"];
+        foreach (var btn in buttons)
+        {
+            var sel = btn == active;
+            btn.BackgroundColor = sel ? primary : Color.FromArgb("#E0E0E0");
+            btn.TextColor = sel ? Colors.White : Color.FromArgb("#444444");
+        }
+    }
 
     private void ValidateForm()
     {
@@ -51,7 +83,7 @@ public partial class ProiectDetailPage : ContentPage
         _proiect.DataStart = dataStartPicker.Date;
         _proiect.DataDeadline = dataDeadlinePicker.Date;
 
-        _proiect.Status = statusPicker.SelectedItem is StatusProiect status ? status : StatusProiect.Activ;
+        _proiect.Status = _selectedStatus;
 
         await _db.SaveProiectAsync(_proiect);
 

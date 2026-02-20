@@ -39,16 +39,20 @@
 
                 <Frame Padding="16" CornerRadius="12" BackgroundColor="{StaticResource CardBackground}"
                        BorderColor="Transparent" HasShadow="True">
-                    <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
-                        <VerticalStackLayout>
-                            <Label Text="Rol" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
-                            <Picker x:Name="rolPicker" Title="Selecteaza rolul" ItemDisplayBinding="{Binding ., Converter={StaticResource RolToStringConverter}}" />
-                        </VerticalStackLayout>
-                        <VerticalStackLayout Grid.Column="1">
-                            <Label Text="Senioritate" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
-                            <Picker x:Name="seniorityPicker" Title="Selecteaza nivelul" />
-                        </VerticalStackLayout>
-                    </Grid>
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Rol" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                        <HorizontalStackLayout Spacing="6">
+                            <Button x:Name="rolDeveloperBtn" Text="Developer" Clicked="OnRolClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                            <Button x:Name="rolTesterBtn" Text="Tester" Clicked="OnRolClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                            <Button x:Name="rolPMBtn" Text="PM" Clicked="OnRolClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                        </HorizontalStackLayout>
+                        <Label Text="Senioritate" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontSize="13" />
+                        <HorizontalStackLayout Spacing="6">
+                            <Button x:Name="seniorityJuniorBtn" Text="Junior" Clicked="OnSeniorityClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                            <Button x:Name="seniorityMidBtn" Text="Mid" Clicked="OnSeniorityClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                            <Button x:Name="senioritySeniorBtn" Text="Senior" Clicked="OnSeniorityClicked" CornerRadius="8" Padding="14,7" FontSize="13" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
                 </Frame>
 
                 <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
